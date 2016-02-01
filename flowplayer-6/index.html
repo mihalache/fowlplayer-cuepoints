@@ -1,0 +1,58 @@
+<!doctype html>
+
+<head>
+
+   <!-- player skin -->
+   <link rel="stylesheet" href="skin/functional.css">
+
+    <!-- site specific styling -->
+    <style>
+      body { text-align: center;}
+      .player { width: 50%; }
+    </style>
+
+    <!-- flowplayer depends on jQuery 1.7.1+ (for now) -->
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+   <!-- include flowplayer -->
+   <script src="flowplayer.js"></script>
+
+</head>
+
+<body>
+
+  <h3>Cuepoints: 2, 5, 15, 30</h3>
+
+  <!-- the player -->
+  <div id="main-video-player" class="player" data-rtmp="rtmp://rtmp.flowplayer.org/cfx/st/" data-ratio="0.5625" data-qualities="216p,360p,720p,1080p" data-default-quality="1080p">
+    <video>
+      <source type="video/webm" src="//drive.flowplayer.org/217795/65380-ChristophEngel15040201MAINWebVersion22062015.webm">
+      <source type="video/mp4" src="//drive.flowplayer.org/217795/65380-ChristophEngel15040201MAINWebVersion22062015.mp4">
+      <source type="video/flash" src="mp4:217795/65380-ChristophEngel15040201MAINWebVersion22062015.mp4">
+    </video>
+  </div>
+
+
+  <script>
+  // run script after document is ready
+  window.addEventListener('load', function() {
+
+    // Select the video container
+    $("#main-video-player").flowplayer({
+      cuepoints: [2,5,15,30]
+    });
+
+    // Make the api variable global
+    window.api = flowplayer($("#main-video-player"));
+
+    // Bind cuepoint event
+    window.api.on("cuepoint", function(e, api, cuepoint) {
+      console.log('Cuepoint event triggered');
+      console.log(cuepoint);
+      console.log('------------------------')
+    });
+
+  });
+  </script>
+
+</body>
